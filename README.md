@@ -43,16 +43,12 @@ python manage.py createsuperuser
 python manage.py runserver
 
 Visit:
+Run the project locally:
+1. Clone the repository
+2. Install dependencies
+3. Run: python manage.py runserver
+4. Access the site at http://localhost:8000
 
-🛠️ Admin Panel → http://127.0.0.1:8000/superadmin/
-
-👤 Register → http://127.0.0.1:8000/register/
-
-🔑 Login → http://127.0.0.1:8000/login/
-
-💼 Job List → http://127.0.0.1:8000/jobs/
-
-🤖 Recommendations → http://127.0.0.1:8000/recommendations/
 
 🗄️ Project Structure
 core/
