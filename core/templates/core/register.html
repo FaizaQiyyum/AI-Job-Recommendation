@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% block title %}Register | AccessJobs{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+  <div class="col-md-6">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-body p-4">
+        <h3 class="text-center mb-4 fw-bold text-primary">Create Account</h3>
+        
+        <form method="post" class="needs-validation" novalidate>
+          {% csrf_token %}
+          
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          
+          <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+          </div>
+          
+          <div class="mb-3">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+          </div>
+          
+          <div class="mb-3">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+          </div>
+          
+          <div class="mb-3">
+            {{ form.skills.label_tag }}
+            {{ form.skills }}
+          </div>
+          
+          <div class="mb-3">
+            {{ form.experience.label_tag }}
+            {{ form.experience }}
+          </div>
+          
+          <div class="mb-3">
+            {{ form.location.label_tag }}
+            {{ form.location }}
+          </div>
+          
+          <button class="btn btn-primary w-100 py-2 rounded-pill fw-semibold">Register</button>
+        </form>
+        
+        <p class="text-center mt-3 mb-0">
+          Already have an account? 
+          <a href="/login/" class="fw-semibold text-decoration-none text-success">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

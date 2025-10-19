@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+{% block title %}Job Listings{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Job Listings</h2>
+</div>
+
+<div class="row">
+  {% for job in jobs %}
+  <div class="col-md-6 mb-3">
+    <div class="card job-card">
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ job.company }} — {{ job.location }}</h6>
+        <p class="card-text">{{ job.description|truncatewords:30 }}</p>
+
+        <a href="{% url 'job_detail' job.id %}" class="btn btn-info btn-sm">Details</a>
+
+        {% if job.id in applied_ids %}
+          <span class="badge bg-success">Applied</span>
+        {% else %}
+          <a href="{% url 'apply_job' job.id %}" class="btn btn-primary btn-sm">Apply</a>
+        {% endif %}
+
+        {% if job.id in bookmarked_ids %}
+          <a href="#" 
+             class="btn btn-warning btn-sm save-job-btn" 
+             data-job="{{ job.title }}">Unsave</a>
+        {% else %}
+          <a href="#" 
+             class="btn btn-outline-warning btn-sm save-job-btn" 
+             data-job="{{ job.title }}">Save</a>
+        {% endif %}
+      </div>
+      <div class="card-footer text-muted">
+        Posted: {{ job.created_at|date:"M d, Y" }}
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No jobs found.</p>
+  {% endfor %}
+</div>
+
+<!-- ===============================
+     Save/Unsave Job Notification JS
+=================================-->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const saveButtons = document.querySelectorAll(".save-job-btn");
+
+  saveButtons.forEach(btn => {
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+      const jobName = btn.getAttribute("data-job");
+      const action = btn.textContent.includes("Save") ? "saved" : "unsaved";
+
+      // Trigger global notification from base.html
+      if (typeof addNotification === "function") {
+        addNotification(`✅ You ${action} "${jobName}" job`);
+      }
+
+      // Toggle button style/text
+      if (action === "saved") {
+        btn.textContent = "Unsave";
+        btn.classList.remove("btn-outline-warning");
+        btn.classList.add("btn-warning");
+      } else {
+        btn.textContent = "Save";
+        btn.classList.remove("btn-warning");
+        btn.classList.add("btn-outline-warning");
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

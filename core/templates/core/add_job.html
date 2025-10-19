@@ -1,0 +1,10 @@
+{% extends "core/admin/base.html" %}
+{% block title %}Add Job{% endblock %}
+{% block content %}
+<h3 class="mb-3 text-center">Add Job</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success w-100">Add Job</button>
+</form>
+{% endblock %}

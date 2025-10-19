@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block title %}Verify Code{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-3">Verify Code</h2>
+    <p>Check your email for the 5-digit code and enter it below.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="code" class="form-label">Verification Code</label>
+            <input type="text" class="form-control" name="code" maxlength="5" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Verify</button>
+    </form>
+</div>
+{% endblock %}

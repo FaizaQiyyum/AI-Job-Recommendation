@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% block title %}Edit Profile | AccessJobs{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5">
+          <h3 class="fw-bold text-primary mb-4">Edit Profile</h3>
+
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Account Info -->
+            <h5 class="fw-bold text-success mb-3">👤 Account Info</h5>
+            <div class="mb-3">
+              {{ user_form.username.label_tag }}
+              {{ user_form.username }}
+              {% if user_form.username.errors %}
+                <div class="text-danger small">{{ user_form.username.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="mb-3">
+              {{ user_form.email.label_tag }}
+              {{ user_form.email }}
+              {% if user_form.email.errors %}
+                <div class="text-danger small">{{ user_form.email.errors }}</div>
+              {% endif %}
+            </div>
+
+            <hr>
+
+            <!-- Profile Details -->
+            <h5 class="fw-bold text-success mb-3">📋 Profile Details</h5>
+
+            {% for field in profile_form %}
+              <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                  <small class="text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% if field.errors %}
+                  <div class="text-danger small">{{ field.errors }}</div>
+                {% endif %}
+              </div>
+            {% endfor %}
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+              <a href="{% url 'profile' %}" class="btn btn-outline-secondary rounded-pill">Cancel</a>
+              <button type="submit" class="btn btn-primary rounded-pill px-4">Save Changes</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
