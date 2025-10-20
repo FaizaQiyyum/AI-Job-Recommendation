@@ -91,3 +91,4 @@ Tools Used: Django, DRF, Bootstrap
 AccessJobs is more than just a typical Django job portal —
 it demonstrates how AI can enhance user experience by providing personalized job recommendations.
 It’s simple enough for beginners to understand, yet powerful enough to inspire further research and development.
+Thanks for your time.
