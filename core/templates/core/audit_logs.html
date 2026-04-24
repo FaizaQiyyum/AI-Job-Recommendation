@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% block title %}Audit Logs | AccessJobs{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3>Audit Logs</h3>
+
+  {% if logs %}
+    <ul class="list-group mt-3">
+      {% for log in logs %}
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong>{{ log.user.username if log.user else "System" }}</strong>
+              <span class="text-muted"> — {{ log.action }}</span>
+              {% if log.extra_data %}
+                <div class="small text-muted">Details: {{ log.extra_data }}</div>
+              {% endif %}
+            </div>
+            <small class="text-muted">{{ log.created_at|date:"M d, Y H:i" }}</small>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted mt-3">No audit logs available.</p>
+  {% endif %}
+</div>
+{% endblock %}

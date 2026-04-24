@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}My Profile | AccessJobs{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5">
+
+          <!-- Profile Header -->
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-4">
+              {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" 
+                     class="rounded-circle shadow border border-3 border-primary" 
+                     width="120" height="120" alt="Profile Picture">
+              {% else %}
+                <img src="{% static 'core/img/default-avatar.png' %}" 
+                     class="rounded-circle shadow border border-3 border-secondary" 
+                     width="120" height="120" alt="Default Profile Picture">
+              {% endif %}
+            </div>
+            <div>
+              <h3 class="fw-bold text-primary mb-1">{{ user.username }}</h3>
+              <p class="text-muted mb-2">{{ user.email }}</p>
+              <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary btn-sm rounded-pill">Edit Profile</a>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Profile Sections in a Grid -->
+          <div class="row g-4">
+            
+            <!-- Contact Information -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">📞 Contact Information</h5>
+              <p><strong>Phone:</strong> {{ profile.phone|default:"Not provided" }}</p>
+              <p><strong>Location:</strong> {{ profile.location|default:"Not provided" }}</p>
+              <p><strong>Address:</strong> {{ profile.address|default:"Not provided" }}</p>
+            </div>
+
+            <!-- Education -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">🎓 Education</h5>
+              <p>{{ profile.education|default:"No education details added yet." }}</p>
+            </div>
+
+            <!-- Certificates -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">📜 Certificates</h5>
+              <p>{{ profile.certificates|default:"No certificates added yet." }}</p>
+            </div>
+
+            <!-- Projects -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">💡 Projects</h5>
+              <p>{{ profile.projects|default:"No projects added yet." }}</p>
+            </div>
+
+            <!-- Extracurriculars -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">🎭 Extracurricular Activities</h5>
+              <p>{{ profile.extracurriculars|default:"No extracurricular activities added yet." }}</p>
+            </div>
+
+            <!-- Hackathons -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">🏆 Hackathons</h5>
+              <p>{{ profile.hackathons|default:"No hackathon details added yet." }}</p>
+            </div>
+
+            <!-- Skills -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">⚡ Skills</h5>
+              {% if skills %}
+                {% for skill in skills %}
+                  <span class="badge bg-primary me-1">{{ skill }}</span>
+                {% endfor %}
+              {% else %}
+                <p class="text-muted">No skills added yet.</p>
+              {% endif %}
+            </div>
+
+            <!-- Experience -->
+            <div class="col-md-6">
+              <h5 class="fw-bold text-success">💼 Experience</h5>
+              <p><strong>{{ profile.experience }}</strong> years</p>
+            </div>
+
+            <!-- Resume -->
+            <div class="col-md-12">
+              <h5 class="fw-bold text-success">📂 Resume</h5>
+              {% if profile.resume %}
+                <a href="{{ profile.resume.url }}" class="btn btn-outline-dark rounded-pill" download>Download Resume</a>
+              {% else %}
+                <p class="text-muted">No resume uploaded yet.</p>
+              {% endif %}
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

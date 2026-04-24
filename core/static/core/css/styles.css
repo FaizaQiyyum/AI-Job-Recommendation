@@ -1,0 +1,247 @@
+/* =========================================================
+   🌟 ACCESSJOBS MODERN UI THEME (Dark/Light + Animations)
+   Author: ChatGPT (Faiza’s Upgrade)
+   ========================================================= */
+
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ===============================
+   GLOBAL BASE
+=================================*/
+:root {
+  --primary: #0d6efd;
+  --secondary: #198754;
+  --accent: #ffc107;
+  --bg-light: #f8fafc;
+  --text: #333;
+  --card-bg: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  background: var(--bg-light);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* ===============================
+   DARK MODE
+=================================*/
+body.dark-mode {
+  --bg-light: #1e1e2f;
+  --text: #e6e6e6;
+  --card-bg: #2a2a40;
+  --shadow: rgba(255, 255, 255, 0.08);
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* ===============================
+   NAVBAR
+=================================*/
+.navbar {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  box-shadow: 0 4px 12px var(--shadow);
+  animation: slideDown 1s ease;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  transition: transform 0.3s;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.nav-link {
+  font-weight: 500;
+  position: relative;
+  color: #fff !important;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: all 0.4s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ===============================
+   CARDS
+=================================*/
+.card {
+  border: none;
+  border-radius: 1.2rem;
+  background: var(--card-bg);
+  box-shadow: 0 4px 20px var(--shadow);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--accent);
+}
+
+/* ===============================
+   BUTTONS
+=================================*/
+.btn {
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Ripple Effect */
+.btn::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.6);
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+.btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* ===============================
+   TABLES
+=================================*/
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+.table-hover tbody tr:hover {
+  background: rgba(13, 110, 253, 0.1);
+}
+
+/* ===============================
+   FOOTER
+=================================*/
+footer {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: #fff;
+  padding: 15px 0;
+  font-size: 0.9rem;
+  text-align: center;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================
+   ANIMATIONS
+=================================*/
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes ripple {
+  0% { transform: scale(0, 0); opacity: 0.6; }
+  20% { transform: scale(25, 25); opacity: 0.3; }
+  100% { transform: scale(40, 40); opacity: 0; }
+}
+
+/* ===============================
+   DASHBOARD CARD GLOW EFFECT
+=================================*/
+.card:hover {
+  box-shadow: 0 0 20px var(--accent), 0 0 30px rgba(255, 193, 7, 0.5);
+}
+
+/* ===============================
+   DARK MODE BUTTON
+=================================*/
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: all 0.3s;
+}
+.dark-mode-toggle:hover {
+  background: var(--secondary);
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* ===============================
+   CLOCK + STATUS INDICATOR
+=================================*/
+#liveClock {
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.online-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #28a745;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===============================
+   NOTIFICATIONS DROPDOWN
+=================================*/
+.notifications-dropdown {
+  border-radius: 10px !important;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease;
+}
+.note {
+  transition: background 0.3s;
+}
+.note:hover {
+  background: rgba(13, 110, 253, 0.08);
+}

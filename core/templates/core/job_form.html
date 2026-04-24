@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block title %}New Job | AccessJobs{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="mb-3">Create Job</h3>
+        <form method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary">Save</button>
+          <a class="btn btn-link" href="/jobs/">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

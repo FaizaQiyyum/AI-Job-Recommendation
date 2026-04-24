@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% block title %}Recommended Jobs{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🤖 AI-Powered Job Recommendations</h2>
+
+<div class="row">
+  {% for rec in recommendations %}
+  {% with job=rec.job %}
+  <div class="col-md-6 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ job.company }} — {{ job.location }}</h6>
+        <p class="card-text">{{ job.description|truncatewords:30 }}</p>
+
+        <!-- AI Match Badge -->
+        <span class="badge bg-info">AI Match: {{ rec.score }}%</span>
+        <small class="text-muted d-block">Why this job? {{ rec.explanation }}</small>
+
+        <!-- Apply / Applied -->
+        {% if job.id in applied_ids %}
+          <span class="badge bg-success mt-1">Applied</span>
+        {% else %}
+          <a href="{% url 'apply_job' job.id %}" class="btn btn-primary btn-sm mt-1">Apply</a>
+        {% endif %}
+
+        <!-- Save / Unsave -->
+        {% if job.id in bookmarked_ids %}
+          <a href="{% url 'bookmark_job' job.id %}" class="btn btn-warning btn-sm mt-1">Unsave</a>
+        {% else %}
+          <a href="{% url 'bookmark_job' job.id %}" class="btn btn-outline-warning btn-sm mt-1">Save</a>
+        {% endif %}
+      </div>
+      <div class="card-footer text-muted">
+        Posted: {{ job.created_at|date:"M d, Y" }}
+      </div>
+    </div>
+  </div>
+  {% endwith %}
+  {% empty %}
+    <p>No recommendations available. Complete your profile to get recommendations.</p>
+  {% endfor %}
+</div>
+{% endblock %}

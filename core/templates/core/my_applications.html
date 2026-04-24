@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block title %}My Applications{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">My Applications</h2>
+
+<div class="row">
+  {% for application in applications %}
+  {% with job=application.job %}
+  <div class="col-md-6 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ job.company }} — {{ job.location }}</h6>
+        <p class="card-text">{{ job.description|truncatewords:30 }}</p>
+
+        <span class="badge bg-info">Status: {{ application.status|capfirst }}</span>
+      </div>
+      <div class="card-footer text-muted">
+        Applied on: {{ application.applied_at|date:"M d, Y" }}
+      </div>
+    </div>
+  </div>
+  {% endwith %}
+  {% empty %}
+    <p>You have not applied to any jobs yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
