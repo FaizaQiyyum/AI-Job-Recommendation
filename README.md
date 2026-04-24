@@ -47,7 +47,7 @@ Run the project locally:
 1. Clone the repository
 2. Install dependencies
 3. Run: python manage.py runserver
-4. Access the site at http://localhost:8000
+4. Access the site 
 
 
 🗄️ Project Structure
